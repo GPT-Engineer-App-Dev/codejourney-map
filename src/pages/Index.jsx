@@ -1,12 +1,26 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from 'react';
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import Flowchart from '@/components/Flowchart';
 
 const Index = () => {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDarkMode);
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
-    <div className="flex justify-center items-center">
-      <div className="text-center">
-        <h1 className="text-3xl">Your Blank Canvas</h1>
-        <p>Chat with the agent to start making edits.</p>
-      </div>
+    <div className={`min-h-screen bg-background text-foreground`}>
+      <Header toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+      <main className="container mx-auto px-4">
+        <Hero />
+        <Flowchart />
+      </main>
     </div>
   );
 };
